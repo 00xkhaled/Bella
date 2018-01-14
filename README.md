@@ -1,8 +1,9 @@
-#Bella
+# Bella
+
 Bella is a pure python post-exploitation data mining tool & remote administration tool for macOS. 🍎💻 
 
 
-##What is it?
+## What is it?
 Bella is a robust, `pure python`, post-exploitation and remote administration tool for macOS.
 
 `Bella` a.k.a. the `server` is an SSL/TLS encrypted reverse shell that can be dropped on any system running macOS >= 10.6. `Bella` offers the following features:
@@ -100,7 +101,7 @@ payload_generator in the Payloads directory should help with this.
 
 Please let me know if you have any issues.
 
-###HUGE thanks
+### HUGE thanks
 `https://github.com/juuso/keychaindump`
 
 `https://github.com/n0fate/chainbreaker`
@@ -112,7 +113,7 @@ Please let me know if you have any issues.
 `https://github.com/stweil/OSXvnc`
 
 
-###TODO
+### TODO
 1. `Control Center support for Linux` [shouldn't take too much tweaking]
 
 1. `Reverse SOCKS proxy to tunnel our traffic through the server.`
@@ -125,7 +126,7 @@ Please let me know if you have any issues.
 
 5. 	The `interactive_shell` command, that provides a fully interactive tty through the `ptty`module. The only downside to this feature at the moment is that is cannot run the pre-programmed functions. [95% done, just working on integration for pre-programmed functions]
 
-####Some design points
+#### Some design points
 1. 	As previously stated, Bella is a pseudo-TTY. By this, the base socket and remote code execution handling of Bella is a fairly abstracted version of a very simple request-response socket. Bella receives a command from the server. If the command matches a pre-programmed function (i.e chrome history dump), then it will perform that function, and send the response back to the client. The client will then handle the response in the same way. After processing the response, it will prompt the client for another command to send.
 
 2. Issues with a low-level socket are numerous, and not limited to:
