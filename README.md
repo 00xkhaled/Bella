@@ -73,16 +73,16 @@ Upon gaining root access, Bella will migrate over to a hidden directory in /Libr
 
 1. Download / clone this repository.
 
-2. Run ./BUILDER and enter the appropriate information. It should look something like this:
-![](Screenshots/Builder.png)
+2. Run ./BUILDER and enter the appropriate information.
+
 3. That's it! Bella is all ready to go. Just upload and execute `Bella` on your macOS target.
+
 4. Now run `Control Center.py` on your macOS control center. It requires no-dependencies [except for mitmproxy if you want to MITM]. It will do some auto-configuration, and you will see something like this after a few seconds.
-![](Screenshots/Found Clients.png)
 The Control Center will constantly update this selection, for up to 128 separate computers.
+
 5. Press `Ctrl-C` to choose from the selection, and then type in the number of the computer that you want. You will then be presented with a screen like this.
-![](Screenshots/Command entry.png)
+
 6. Start running commands! `bella_info` is a great one. Run `manual` to get a full manual of all of the commands. Also, you can hit tab twice to see a list of available commands.
-![](Screenshots/Bella Info.png)
 
 **Little note**: Bella works across the internet, if you do some configuration. Configure your firewall to forward Bella's port to your Control Center. Other important ports to forward:
 	1) VNC - 5500. 2) Microphone - 2897. 3) MITM - 8081
@@ -90,11 +90,10 @@ The Control Center will constantly update this selection, for up to 128 separate
 ##Other Information
 This project is being **actively** maintained. Please submit any and all bug reports, questions, feature requests, or related information.
 
-
-
 Bella leverages keychaindump, VNC, microphone streaming, etc, by sending base64 encoded C binaries over to the Bella server / target. I have included pre-compiled and encoded files in the Payloads/payloads.txt file. If you wish to compile your own version of these payloads, here is what to do after you compile them:
 
 1. Encode them in base64 and put them in the payloads.txt in the following order, each one separated by a new line.
+
 2. vnc, keychaindump, microphone, rootshell, insomnia, lock_icon, chainbreaker.
 
 payload_generator in the Payloads directory should help with this.
