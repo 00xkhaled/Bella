@@ -1,6 +1,6 @@
 # Bella
 
-Bella is a pure python post-exploitation data mining tool & remote administration tool for macOS. 🍎💻 
+Bella is a pure python post-exploitation data mining tool & remote administration tool for macOS. 🍎 💻
 
 
 ## What is it?
@@ -101,6 +101,7 @@ payload_generator in the Payloads directory should help with this.
 Please let me know if you have any issues.
 
 ### HUGE thanks
+
 `https://github.com/juuso/keychaindump`
 
 `https://github.com/n0fate/chainbreaker`

