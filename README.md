@@ -67,7 +67,7 @@ Upon gaining root access, Bella will migrate over to a hidden directory in /Libr
 5. `A lot of behind the scenes automation.`
 
 
-##HOW TO USE
+## HOW TO USE
 
 **Bella**'s `power` lies in its high level of automation of most of the painstaking tasks that one faces in a post-exploitation scenario. It is incredibly easy to **setup and use**, requires no pre-configuration on the target, and very little configuration on the Control Center. It leverages the *incredible* behind the scenes power of macOS and Python for a fluid post-exploitation experience.
 
@@ -87,7 +87,7 @@ The Control Center will constantly update this selection, for up to 128 separate
 **Little note**: Bella works across the internet, if you do some configuration. Configure your firewall to forward Bella's port to your Control Center. Other important ports to forward:
 	1) VNC - 5500. 2) Microphone - 2897. 3) MITM - 8081
 
-##Other Information
+## Other Information
 This project is being **actively** maintained. Please submit any and all bug reports, questions, feature requests, or related information.
 
 Bella leverages keychaindump, VNC, microphone streaming, etc, by sending base64 encoded C binaries over to the Bella server / target. I have included pre-compiled and encoded files in the Payloads/payloads.txt file. If you wish to compile your own version of these payloads, here is what to do after you compile them:
