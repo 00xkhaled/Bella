@@ -63,7 +63,7 @@ else
 	exit 1
 fi
 
-echo -e ${BLUE}'Preparing Python code$'${RESET}
+echo -e ${BLUE}'Preparing Python code'${RESET}
 mv $BuildsPath/bella.py $BuildsPath/$bellaNoExt
 echo -e ${GREEN}'Done!'${RESET}
 
