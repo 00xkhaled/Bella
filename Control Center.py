@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-
-# -*- coding: utf-8 -*-
+# coding=utf-8
 import socket, os, sys, select, time, bz2, random, platform, datetime, base64, pickle
 import re, urllib, json, subprocess, errno, struct, optparse, ssl
 
